@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Policy schemaVersion="1" policyId="1" name="Windows办公终端基线">
+    <GatewayControl enabled="true" allowChange="false"/>
+    <NetworkControl enabled="true" defaultAction="DENY">
+        <Rule id="n1" action="ALLOW" ip="192.168.1.100"/>
+        <Rule id="n2" action="DENY" ip="10.0.0.1"/>
+    </NetworkControl>
+    <FileAudit enabled="true">
+        <Path value="C:\Users"/>
+        <Path value="D:\Work\R&amp;D"/>
+    </FileAudit>
+    <ApplicationControl enabled="true">
+        <Rule id="a1" action="DENY" process="malware-test.exe"/>
+        <Rule id="a2" action="ALLOW" process="office.exe"/>
+    </ApplicationControl>
+</Policy>

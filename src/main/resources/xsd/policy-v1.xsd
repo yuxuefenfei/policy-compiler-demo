@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="ActionType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ALLOW"/>
+            <xs:enumeration value="DENY"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Policy">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="GatewayControl">
+                    <xs:complexType>
+                        <xs:attribute name="enabled" type="xs:boolean" use="required"/>
+                        <xs:attribute name="allowChange" type="xs:boolean" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="NetworkControl">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Rule" minOccurs="0" maxOccurs="2000">
+                                <xs:complexType>
+                                    <xs:attribute name="id" type="xs:string" use="required"/>
+                                    <xs:attribute name="action" type="ActionType" use="required"/>
+                                    <xs:attribute name="ip" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="enabled" type="xs:boolean" use="required"/>
+                        <xs:attribute name="defaultAction" type="ActionType" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="FileAudit">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Path" minOccurs="0" maxOccurs="1000">
+                                <xs:complexType>
+                                    <xs:attribute name="value" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="enabled" type="xs:boolean" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ApplicationControl">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Rule" minOccurs="0" maxOccurs="2000">
+                                <xs:complexType>
+                                    <xs:attribute name="id" type="xs:string" use="required"/>
+                                    <xs:attribute name="action" type="ActionType" use="required"/>
+                                    <xs:attribute name="process" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="enabled" type="xs:boolean" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="schemaVersion" type="xs:integer" use="required" fixed="1"/>
+            <xs:attribute name="policyId" type="xs:long" use="required"/>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -1,0 +1,49 @@
+{
+  "expectedRevision": 0,
+  "name": "Windows办公终端基线",
+  "schemaVersion": 1,
+  "modules": {
+    "gateway": {
+      "enabled": true,
+      "allowChange": false
+    },
+    "network": {
+      "enabled": true,
+      "defaultAction": "DENY",
+      "rules": [
+        {
+          "id": "n1",
+          "action": "ALLOW",
+          "ip": "192.168.1.100"
+        },
+        {
+          "id": "n2",
+          "action": "DENY",
+          "ip": "10.0.0.1"
+        }
+      ]
+    },
+    "fileAudit": {
+      "enabled": true,
+      "paths": [
+        "C:\\Users",
+        "D:\\Work\\R&D"
+      ]
+    },
+    "application": {
+      "enabled": true,
+      "rules": [
+        {
+          "id": "a1",
+          "action": "DENY",
+          "process": "malware-test.exe"
+        },
+        {
+          "id": "a2",
+          "action": "ALLOW",
+          "process": "office.exe"
+        }
+      ]
+    }
+  }
+}
